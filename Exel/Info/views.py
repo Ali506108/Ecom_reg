@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+
 from .forms import RegisterForm
+from .models import Product
 
 
 def sign_up(request):
@@ -24,3 +26,27 @@ def sign_up(request):
 
 def user_profile(request, username):
     return render(request, "users/user_profile.html", {"username": username})
+
+
+def filter_products(request):
+    filtered_products = Product.objects.filter()
+    filter_type = request.GET.get(
+        "filter_type", "price"
+    )  # Default to filtering by price
+
+    if filter_type == "price":
+        cheapest_products = Product.objects.order_by("price")[:5]
+        most_expensive_products = Product.objects.order_by("-price")[:5]
+    elif filter_type == "category":
+        filtered_products = Product.objects.filter(category="Phone")
+    else:
+        filtered_products = Product.objects.all()
+
+    context = {
+        "filtered_products": filtered_products,
+        "filter_type": filter_type,
+    }
+
+    context = {"filtered_products": filtered_products}
+
+    return render(request, "users/your_template.html", context)
