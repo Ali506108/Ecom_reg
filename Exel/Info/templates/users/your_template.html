@@ -49,6 +49,7 @@
         <select id="filter_type" name="filter_type">
             <option value="price" {% if filter_type == 'price' %}selected{% endif %}>Price</option>
             <option value="category" {% if filter_type == 'category' %}selected{% endif %}>Category</option>
+            <option value="categorys" {% if filter_type == 'categorys' %}selected{% endif %}>Category</option>
         </select>
         <button type="submit">Apply Filter</button>
     </form>

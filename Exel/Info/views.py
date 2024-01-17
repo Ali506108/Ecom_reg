@@ -39,6 +39,8 @@ def filter_products(request):
         most_expensive_products = Product.objects.order_by("-price")[:5]
     elif filter_type == "category":
         filtered_products = Product.objects.filter(category="Phone")
+    elif filter_type == "categorys":
+        filtered_products = Product.objects.filter(category="Air")
     else:
         filtered_products = Product.objects.all()
 
