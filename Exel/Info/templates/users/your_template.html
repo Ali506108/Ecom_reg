@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Filtered Products</title>
+    
   </head>
   <body>
     <style>
@@ -49,10 +50,12 @@
         <select id="filter_type" name="filter_type">
             <option value="price" {% if filter_type == 'price' %}selected{% endif %}>Price</option>
             <option value="category" {% if filter_type == 'category' %}selected{% endif %}>Category</option>
-            <option value="categorys" {% if filter_type == 'categorys' %}selected{% endif %}>Category</option>
+            <option value="categorys" {% if filter_type == 'categorys' %}selected{% endif %}>Air</option>
         </select>
         <button type="submit">Apply Filter</button>
     </form>
+
+    <a href="{% url 'add_product' %}">Add Product</a>
 
 
     {% for product in filtered_products %}
@@ -60,7 +63,12 @@
       <h3>{{ product.name }}</h3>
       <p>Category: {{ product.category }}</p>
       <p>Price: ${{ product.price }}</p>
-      <img src="{{ product.photo.url }}" alt="{{ product.name }} Photo" />
+      
+      <div style="text-align: center;">
+        <img style="width: 800px; height: 650px; margin: 0 auto;" src="{{ product.photo.url }}" alt="{{ product.name }} Photo" />
+      </div>
+            <p>Description: {{ product.description }}</p>
+
     </div>
     {% endfor %}
   </body>
